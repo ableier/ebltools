@@ -4,7 +4,7 @@
 # # DoseTestSteps.py
 # Calculates doses for multiplicative dose step in an electron beam lithography dose test
 # 
-# Alan R. Bleier, Cornell NanoScale Facility, April 17, 2023
+# Alan R. Bleier, Cornell NanoScale Facility, May 9, 2023
 # 
 # To use this script, enter: 
 # 
@@ -33,39 +33,9 @@
 # 
 # If proximity correction is needed for the dose test, then it is not possible to use multiple copies of the same pattern in one GDS file. In this case, one can just use the list of doses as base doses in multiple exposures in the JEOL schedule file.
 # 
-# This software is distributed under the BSD 3-Clause "New" or "Revised" License https://directory.fsf.org/wiki/License:BSD-3-Clause
+# See https://github.com/ableier/ebltools/blob/master/LICENSE for copyright and license.
 
-# Copyright (c) 2023 Alan R. Bleier
-# 
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-# 
-#     (1) Redistributions of source code must retain the above copyright
-#     notice, this list of conditions and the following disclaimer. 
-# 
-#     (2) Redistributions in binary form must reproduce the above copyright
-#     notice, this list of conditions and the following disclaimer in
-#     the documentation and/or other materials provided with the
-#     distribution.  
-#     
-#     (3)The name of the author may not be used to
-#     endorse or promote products derived from this software without
-#     specific prior written permission.
-# 
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE. 
-
-# In[21]:
+# In[1]:
 
 
 N = 18
@@ -83,7 +53,7 @@ f=np.exp((1/(N-1)) * (np.log(D_N) - np.log(D_0) ) )
 print("Multiplicative factor from one step to the next: ", str(f) + "\n")
 
 
-# In[22]:
+# In[2]:
 
 
 doses = []
@@ -99,7 +69,7 @@ print("Doses: " + "\n" + str(roundedDoses) + "\n")
 print ("Mean dose: " + str(round(np.mean(doses), 1)) + " uC/cm^2" + "\n")
 
 
-# In[23]:
+# In[3]:
 
 
 percentIncreasesForJDF = []
@@ -118,7 +88,7 @@ print("Modulation table for JEOL job deck file: ")
 print(' '.join(modulationTable) + "\n")
 
 
-# In[24]:
+# In[4]:
 
 
 # Write comma separated variable file of relative doses for reading into LayoutBEAMER Feature Dose Assignment 
@@ -143,7 +113,7 @@ for n in range(0, N):
 file1.close()
 
 
-# In[25]:
+# In[5]:
 
 
 # Write JEOL .jdi modulation table file
@@ -154,10 +124,3 @@ file1 = open(jdiFile, "w")
 modulationTableString=str(' '.join(modulationTable))
 file1.write(modulationTableString + "\n\n" + "; Modulation table for manual assignment of doses to layers \n; Not for use when BEAMER FDA module has been used\n")
 file1.close()
-
-
-# In[ ]:
-
-
-
-
