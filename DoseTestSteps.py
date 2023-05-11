@@ -4,7 +4,7 @@
 # # DoseTestSteps.py
 # Calculates doses for multiplicative dose step in an electron beam lithography dose test
 # 
-# Alan R. Bleier, Cornell NanoScale Facility, May 9, 2023
+# Alan R. Bleier, Cornell NanoScale Facility, April 17, 2023
 # 
 # To use this script, enter: 
 # 
@@ -35,7 +35,7 @@
 # 
 # See https://github.com/ableier/ebltools/blob/master/LICENSE for copyright and license.
 
-# In[1]:
+# In[21]:
 
 
 N = 18
@@ -53,7 +53,7 @@ f=np.exp((1/(N-1)) * (np.log(D_N) - np.log(D_0) ) )
 print("Multiplicative factor from one step to the next: ", str(f) + "\n")
 
 
-# In[2]:
+# In[22]:
 
 
 doses = []
@@ -69,7 +69,7 @@ print("Doses: " + "\n" + str(roundedDoses) + "\n")
 print ("Mean dose: " + str(round(np.mean(doses), 1)) + " uC/cm^2" + "\n")
 
 
-# In[3]:
+# In[23]:
 
 
 percentIncreasesForJDF = []
@@ -88,7 +88,7 @@ print("Modulation table for JEOL job deck file: ")
 print(' '.join(modulationTable) + "\n")
 
 
-# In[4]:
+# In[24]:
 
 
 # Write comma separated variable file of relative doses for reading into LayoutBEAMER Feature Dose Assignment 
@@ -113,7 +113,7 @@ for n in range(0, N):
 file1.close()
 
 
-# In[5]:
+# In[25]:
 
 
 # Write JEOL .jdi modulation table file
@@ -124,3 +124,10 @@ file1 = open(jdiFile, "w")
 modulationTableString=str(' '.join(modulationTable))
 file1.write(modulationTableString + "\n\n" + "; Modulation table for manual assignment of doses to layers \n; Not for use when BEAMER FDA module has been used\n")
 file1.close()
+
+
+# In[ ]:
+
+
+
+
